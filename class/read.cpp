@@ -2,10 +2,12 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include "../headers/data.hpp"
 
 using namespace std;
 
-int vectorToInt(vector<string> vect)
+int vectorToInt(vector<char> vect)
+//Permet de convertir un tableau de char contenant des nombres en int
 {
     string temp(vect.begin(), vect.end());
     int number = stoi(temp);
@@ -13,10 +15,9 @@ int vectorToInt(vector<string> vect)
     return number;
 }
 
-
-int main()
+vector<int> parsing(string path)
 {
-    string path = "../data/n=100,m=5-20200416/100Md5_1_1_mixte.txt";
+
     ifstream file(path);
 
     if(file)
@@ -55,13 +56,20 @@ int main()
             }
         }
 
-    cout << vectorToInt(n);
+    cout << "n : " << vectorToInt(n) << endl;
+    cout << "m : " << vectorToInt(m) << endl;
+    cout << "q : " << vectorToInt(q) << endl;
 
         // while(getline(file, line))
         // {
         //     cout << line << endl;
         // }
     }
+}
 
+int main()
+{
+    string path = "../data/n=100,m=5-20200416/100Md5_1_1_mixte.txt";
+    
     return 0;
 }
