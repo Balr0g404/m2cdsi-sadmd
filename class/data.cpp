@@ -2,8 +2,9 @@
 
 using namespace std;
 
-Data::Data(int parsed_n, int parsed_m, int parsed_q) : n(parsed_n), m(parsed_m), q(parsed_q), profits(0), ressources(0), demandes(0), poids_r(0), poids_d(0)
+Data::Data(vector<vector<int>> donnees) : n(donnees[0][0]), m(donnees[0][1]), q(donnees[0][2]), profits(0), ressources(0), demandes(0), poids_r(0), poids_d(0)
 {
+    //INITIALISATION
     profits = new int[n]; //Retourne un tableau, car en c++, un tableau n'est rien d'autre qu'un pointeur.
     ressources = new int[m];
     demandes = new int[q];
@@ -21,6 +22,27 @@ Data::Data(int parsed_n, int parsed_m, int parsed_q) : n(parsed_n), m(parsed_m),
         poids_d[i] = new int[n];
     }
 
+    for (int i = 0; i < (n/10); i++)//Les profits sont rangés par ligne de 10
+    //On itère à partir de la deuxième
+    {
+        for (int j = 0; j < 10; j++)//On récupère les 10 profits de chaques lignes
+        {
+            //cout << "ligne : " << i << " colone : " << j << " case : " << j+10*(i-1) << endl;
+            profits[j+10*i] = donnees[i+1][j];
+        }
+    }
+
+    //On récupère les capacités des m contraintes
+    for (int i = 0; i < m; i++)
+    {
+        ressources[i] = donnees[(n/10)+1][i];
+    }
+    
+    //On récupère les demandes des q contraintes
+    // for (int i = 0, i < q; i++)
+    // {
+    //     demandes[i] = donnees[1+(n/10)+1]
+    // }
 }
 
 Data::~Data()

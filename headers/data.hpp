@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <cmath>
 
 
 
@@ -15,7 +17,7 @@ class Data
 {
     public:
 
-    Data(int parsed_n, int parsed_m, int parsed_q); //constructeur, les données passées en argument le seront par une fonction de parsing 
+    Data(std::vector<std::vector<int>> donnees); //constructeur, les données passées en argument le seront par une fonction de parsing 
     ~Data(); //Destructeur
 
     int get_n(); //getter
