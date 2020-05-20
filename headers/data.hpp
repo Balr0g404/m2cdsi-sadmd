@@ -3,15 +3,19 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <fstream>
+
 
 
 class Data 
+//Classe représentant les jeux de données
+//L'ensemble des données caractéristant l'instance 
+//sera résumée dans un objet.
+//Il aura les différents poids dans des tableaux qui nous
+//permettrons de travailler plus simplement.
 {
     public:
 
-    Data(int parsed_n, int parsed_m, int parsed_q); //constructeur
+    Data(int parsed_n, int parsed_m, int parsed_q); //constructeur, les données passées en argument le seront par une fonction de parsing 
     ~Data(); //Destructeur
 
     int get_n(); //getter
@@ -23,8 +27,9 @@ class Data
     int* get_ressources(); //getter
     int* get_demandes(); //getter
 
-    int* get_poids_r(); //getter
-    int* get_poids_d(); //getter
+    //Pour créer un tableau à deux dimensions, on utilise un pointeur de pointeur.
+    int** get_poids_r(); //getter
+    int** get_poids_d(); //getter
 
 
 
@@ -38,8 +43,8 @@ class Data
     int *ressources; //capacité des m contraintes
     int *demandes; //capacité des q demandes
 
-    int *poids_r; //m tableaux contenant chacun les n valeurs des poids associé à la contrainte de ressource 
-    int *poids_d; //q tableaux contenant chacun les n valeurs des poids associé à la contrainte de demande
+    int **poids_r; //m tableaux contenant chacun les n valeurs des poids associé à la contrainte de ressource 
+    int **poids_d; //q tableaux contenant chacun les n valeurs des poids associé à la contrainte de demande
 
 };
 
