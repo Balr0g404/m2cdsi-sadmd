@@ -8,6 +8,6 @@
 #include <vector>
 
 std::vector<int> extractIntegerWord(std::string str);
-std::vector<std::vector<int>> readData(std::string path); 
+std::vector<int> readData(std::string path); 
 
 #endif

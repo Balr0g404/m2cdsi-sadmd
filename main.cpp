@@ -10,57 +10,60 @@
 
 using namespace std;
 
+void printVect(vector<int> vect)
+{
+    for (int i=0; i < vect.size(); i++)
+    {
+        cout << "{" << vect[i] << "}";
+    }
+    cout << endl;
+}
+
+void printArr(int arr[], int taille)
+{
+    for (int i=0; i < taille; i++)
+    {
+        cout << "{" << arr[i] << "}";
+    }
+    cout << endl;
+}
+
 int main()
 {
 
     string path = "data/n=100,m=5-20200416/100Md5_1_1_mixte.txt";
     //string path = "data/n=100,m=5-20200416/100Md5_15_5_pos.txt";
     //string path = "data/n=250,m=30-20200416/250Md30_15_30_mixte.txt";
-    vector<vector<int>> donnees = readData(path);
+    vector<int> donnees = readData(path);
 
-    int n = donnees[0][0];
-    int m = donnees[0][1];
-    int q = donnees[0][2];
+    Data instance(donnees);
+    const int n = instance.get_n();
+    const int m = instance.get_m();
+    const int q = instance.get_q();
 
-    // for (int i=0; i<donnees.size(); i++) 
-    // {
-    //     for (int j=0; j<donnees[i].size(); j++)
-    //     {
-    //         cout << "{" << donnees[i][j] << "}";
-    //     }
-    // cout << endl; 
-    // }
+    int profits[n];
+    int ressources[m];
+    int demandes[q];
 
-   vector<int> test;
+    //Il est possible de récupérer les tableaux comme ça :
+    //int* arr = instance.get_profits();
+    //Cependant, cela implique que chaque modification du tableau
+    //dans ce code modifiera l'attribut.
+    //On préfère donc le copier
 
-   for (int i=0; i<donnees.size(); i++)
-   {
-       for (int j=0; j<donnees[i].size(); j++)
-       {
-           test.push_back(donnees[i][j]);
-       }
-   }
+    copy(instance.get_profits(), instance.get_profits()+n, profits);
+    copy(instance.get_ressources(), instance.get_ressources()+m, ressources);
+    copy(instance.get_demandes(), instance.get_demandes()+q, ressources);
 
-   for (int i = 0; i < test.size(); i++)
-   {
-       cout << "{" << test[i] << "}"; 
-   }
-   
+    // printArr(profits, n);
+    // cout << endl;
+    // printArr(ressources, m);
+    // cout << endl;
+    // printArr(demandes, q);
+    
 
 
-
-
-    // Data test(donnees);
-
-    // int* profits = test.get_profits();
-    // int* ressources = test.get_ressources();
-    // int n = test.get_n();
-    // int m = test.get_m();
-
-    // for (int i = 0; i < m; i++)
-    // {
-    //     cout << "{" << ressources[i] << "}"; 
-    // }      
+    //printVect(donnees);   
 
     return 0;
 }

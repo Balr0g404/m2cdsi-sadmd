@@ -26,11 +26,11 @@ vector<int> extractIntegerWord(string str)
     return extract;
 }
 
-vector<vector<int>> readData(string path)
+vector<int> readData(string path)
 //Extrait chaque int des données d'entrée en un vecteur par ligne
 {
     vector<int> extracted;
-    vector<vector<int>> fichier;
+    vector<int> fichier;
  
     ifstream file(path);
     if (file)
@@ -40,7 +40,13 @@ vector<vector<int>> readData(string path)
         while(getline(file, line))
         {
             extracted = extractIntegerWord(line);
-            fichier.push_back(extracted);
+            for (int i=0; i < extracted.size(); i++)
+            {
+                if (extracted[i] != ' ' && extracted[i] != '\n' )
+                {
+                    fichier.push_back(extracted[i]);
+                }
+            }
         }
     }
     else
@@ -50,18 +56,18 @@ vector<vector<int>> readData(string path)
 
     int i = 0;
 
-    while(i < fichier.size()) //Retire les lignes vides
-    {
-        if (fichier[i].size() == 0)
-        {
-            fichier.erase(fichier.begin() + i);
-            i = 0;
-        }
-        else
-        {
-            i++;
-        }
-    }
+    // while(i < fichier.size()) //Retire les lignes vides
+    // {
+    //     if (fichier[i].size() == 0)
+    //     {
+    //         fichier.erase(fichier.begin() + i);
+    //         i = 0;
+    //     }
+    //     else
+    //     {
+    //         i++;
+    //     }
+    // }
    
     return fichier;
 }

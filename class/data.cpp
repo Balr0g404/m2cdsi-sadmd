@@ -2,14 +2,12 @@
 
 using namespace std;
 
-Data::Data(vector<vector<int>> donnees) : n(donnees[0][0]), m(donnees[0][1]), q(donnees[0][2]), profits(0), ressources(0), demandes(0), poids_r(0), poids_d(0)
+Data::Data(vector<int> donnees) : n(donnees[0]), m(donnees[1]), q(donnees[2]), profits(0), ressources(0), demandes(0), poids_r(0), poids_d(0)
 {
     //INITIALISATION
     profits = new int[n]; //Retourne un tableau, car en c++, un tableau n'est rien d'autre qu'un pointeur.
     ressources = new int[m];
     demandes = new int[q];
-
-    cout << "test 1 " << endl;
 
     poids_r = new int*[m]; //Déclare un pointeur vers un pointeur d'entier, pour un tableau à deux dimensions
     poids_d = new int*[q]; //Soit un pointeur vers un tableau.
@@ -24,60 +22,43 @@ Data::Data(vector<vector<int>> donnees) : n(donnees[0][0]), m(donnees[0][1]), q(
         poids_d[i] = new int[n];
     }
 
-    int starting_line = 1;
-    int current_line = 1;
+    //On récupère les n profits
 
-    cout << "test 2 " << endl;
-
-    for (int i = 0; i < (n/10); i++)//Les profits sont rangés par ligne de 10
-    //On itère à partir de la deuxième
+    for (int i=0; i < n; i++)
     {
-        for (int j = 0; j < 10; j++)//On récupère les 10 profits de chaques lignes
-        {
-            //cout << "ligne : " << i << " colone : " << j << " case : " << j+10*(i-1) << endl;
-            profits[j+10*i] = donnees[current_line][j];
-        }
-        current_line++; //On passe à la ligne suivante
-    }  
-
-    cout << "test 3 " << endl;
-
-    //On récupère les capacités des m contraintes
-    //Pour faciliter et optimiser le code, on utilise également le fait que 
-    //m ne peut prendre que les valeurs 5, 10 ou 30
-
-    if (m < 10) //Si les valeurs de m sont sur une seule ligne
-    {
-        cout << "test 4 " << endl;
-        for (int j = 0; j < m; j++)
-        {
-            ressources[j] = donnees[current_line][j];
-        }
-        current_line++;
+        profits[i] = donnees[i+3];
     }
-    else //Si les valeurs de m sont sur plusieurs lignes
-    {
-        cout << "test 5 " << endl;
-        cout << (m/10) << endl;
-        cout << current_line << endl;
 
-        for (int i=0; i < (m/10); i++)
+    //On récupère les m ressources
+    for (int i=0; i < m; i++)
+    {
+        ressources[i] = donnees[i+n+3];
+    }
+
+    //On récupère les n demandes
+    for (int i=0; i < q; i++)
+    {
+        demandes[i] = donnees[i+n+m+3];
+    }
+
+    //On récupère les m*n poids pour les contraintes de ressources
+    for (int i=0; i < m; i++)
+    {
+        for (int j=0; j < n; j++)
         {
-            for (int j = 0; i < m; j++)
-            {
-                ressources[j+10*i] = donnees[current_line][j];
-            }
-            current_line++;
+            poids_r[i][j] = donnees[(i*n+j)+n+m+3];
         }
     }
-    
-    cout << "test 6 " << endl;
-    
-    //On récupère les demandes des q contraintes
-    // for (int i = 0, i < q; i++)
-    // {
-    //     demandes[i] = donnees[1+(n/10)+1]
-    // }
+
+    //On récupère les q*n poids pour les contraintes de demandes
+    for (int i=0; i < q; i++)
+    {
+        for (int j=0; j < n; j++)
+        {
+            poids_d[i][j] = donnees[(i*n+j)+(n*m)+n+m+3];
+        }
+    }
+
 }
 
 Data::~Data()
@@ -117,6 +98,10 @@ int Data::get_q()
 {
     return q;
 }
+
+//Les attributs sont privés, mais comme les getters retournent des pointeurs
+//on risque de modifier l'attribut dans le main.
+//Pour éviter ça, on copiera le retour du getter dans le main.
 
 int* Data::get_profits()
 {   

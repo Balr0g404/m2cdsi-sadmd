@@ -17,7 +17,7 @@ class Data
 {
     public:
 
-    Data(std::vector<std::vector<int>> donnees); //constructeur, les données passées en argument le seront par une fonction de parsing 
+    Data(std::vector<int> donnees); //constructeur, les données passées en argument le seront par une fonction de parsing 
     ~Data(); //Destructeur
 
     int get_n(); //getter
