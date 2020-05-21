@@ -9,6 +9,8 @@ Data::Data(vector<vector<int>> donnees) : n(donnees[0][0]), m(donnees[0][1]), q(
     ressources = new int[m];
     demandes = new int[q];
 
+    cout << "test 1 " << endl;
+
     poids_r = new int*[m]; //Déclare un pointeur vers un pointeur d'entier, pour un tableau à deux dimensions
     poids_d = new int*[q]; //Soit un pointeur vers un tableau.
 
@@ -22,21 +24,54 @@ Data::Data(vector<vector<int>> donnees) : n(donnees[0][0]), m(donnees[0][1]), q(
         poids_d[i] = new int[n];
     }
 
+    int starting_line = 1;
+    int current_line = 1;
+
+    cout << "test 2 " << endl;
+
     for (int i = 0; i < (n/10); i++)//Les profits sont rangés par ligne de 10
     //On itère à partir de la deuxième
     {
         for (int j = 0; j < 10; j++)//On récupère les 10 profits de chaques lignes
         {
             //cout << "ligne : " << i << " colone : " << j << " case : " << j+10*(i-1) << endl;
-            profits[j+10*i] = donnees[i+1][j];
+            profits[j+10*i] = donnees[current_line][j];
         }
-    }
+        current_line++; //On passe à la ligne suivante
+    }  
+
+    cout << "test 3 " << endl;
 
     //On récupère les capacités des m contraintes
-    for (int i = 0; i < m; i++)
+    //Pour faciliter et optimiser le code, on utilise également le fait que 
+    //m ne peut prendre que les valeurs 5, 10 ou 30
+
+    if (m < 10) //Si les valeurs de m sont sur une seule ligne
     {
-        ressources[i] = donnees[(n/10)+1][i];
+        cout << "test 4 " << endl;
+        for (int j = 0; j < m; j++)
+        {
+            ressources[j] = donnees[current_line][j];
+        }
+        current_line++;
     }
+    else //Si les valeurs de m sont sur plusieurs lignes
+    {
+        cout << "test 5 " << endl;
+        cout << (m/10) << endl;
+        cout << current_line << endl;
+
+        for (int i=0; i < (m/10); i++)
+        {
+            for (int j = 0; i < m; j++)
+            {
+                ressources[j+10*i] = donnees[current_line][j];
+            }
+            current_line++;
+        }
+    }
+    
+    cout << "test 6 " << endl;
     
     //On récupère les demandes des q contraintes
     // for (int i = 0, i < q; i++)
