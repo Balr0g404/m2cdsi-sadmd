@@ -25,13 +25,13 @@ class Data
     int get_q(); //getter
 
     //On passe par des pointeurs car il n'est pas possible de renvoyer directement un tableau statique dans une fonction
-    int* get_profits(); //getter
-    int* get_ressources(); //getter
-    int* get_demandes(); //getter
+    int* get_profits() const; //getter
+    int* get_ressources() const; //getter
+    int* get_demandes() const; //getter
 
     //Pour créer un tableau à deux dimensions, on utilise un pointeur de pointeur.
-    int** get_poids_r(); //getter
-    int** get_poids_d(); //getter
+    int** get_poids_r() const; //getter
+    int** get_poids_d() const; //getter
 
 
 

@@ -9,6 +9,8 @@ Data::Data(vector<int> donnees) : n(donnees[0]), m(donnees[1]), q(donnees[2]), p
     ressources = new int[m];
     demandes = new int[q];
 
+    int offset = 3; //offset de lecture du fichier, initialisé à 3 car on a déjà lu trois valeurs
+
     poids_r = new int*[m]; //Déclare un pointeur vers un pointeur d'entier, pour un tableau à deux dimensions
     poids_d = new int*[q]; //Soit un pointeur vers un tableau.
 
@@ -26,36 +28,44 @@ Data::Data(vector<int> donnees) : n(donnees[0]), m(donnees[1]), q(donnees[2]), p
 
     for (int i=0; i < n; i++)
     {
-        profits[i] = donnees[i+3];
+        profits[i] = donnees[i+offset];
     }
+
+    offset += n;
 
     //On récupère les m ressources
     for (int i=0; i < m; i++)
     {
-        ressources[i] = donnees[i+n+3];
+        ressources[i] = donnees[i+offset];
     }
+
+    offset += m;
 
     //On récupère les n demandes
     for (int i=0; i < q; i++)
     {
-        demandes[i] = donnees[i+n+m+3];
+        demandes[i] = donnees[i+offset];
     }
+
+    offset += q;
 
     //On récupère les m*n poids pour les contraintes de ressources
     for (int i=0; i < m; i++)
     {
         for (int j=0; j < n; j++)
         {
-            poids_r[i][j] = donnees[(i*n+j)+n+m+3];
+            poids_r[i][j] = donnees[(i*n+j)+offset];
         }
     }
+
+    offset += n*m;
 
     //On récupère les q*n poids pour les contraintes de demandes
     for (int i=0; i < q; i++)
     {
         for (int j=0; j < n; j++)
         {
-            poids_d[i][j] = donnees[(i*n+j)+(n*m)+n+m+3];
+            poids_d[i][j] = donnees[(i*n+j)+offset];
         }
     }
 
@@ -103,27 +113,27 @@ int Data::get_q()
 //on risque de modifier l'attribut dans le main.
 //Pour éviter ça, on copiera le retour du getter dans le main.
 
-int* Data::get_profits()
+int* Data::get_profits() const
 {   
     return profits;
 }
 
-int* Data::get_ressources()
+int* Data::get_ressources() const
 {
     return ressources;
 }
 
-int* Data::get_demandes()
+int* Data::get_demandes() const
 {
     return demandes;
 }
 
-int** Data::get_poids_r()
+int** Data::get_poids_r() const
 {
     return poids_r;
 }
 
-int** Data::get_poids_d()
+int** Data::get_poids_d() const
 {
     return poids_d;
 }
