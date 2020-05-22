@@ -20,16 +20,3 @@ void printArr(int arr[], int taille)
     }
     cout << endl;
 }
-
-void print2dArr (int* arr[], int taille1, int taille2)
-{
-    for (int i = 0; i < taille1; i++)
-    {
-        for (int j = 0; i < taille2; j++)
-        {
-            cout << "{" << arr[i][j] << "}";
-        }
-        cout << endl;
-    }
-    cout << endl;
-}

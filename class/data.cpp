@@ -11,8 +11,8 @@ Data::Data(vector<int> donnees) : n(donnees[0]), m(donnees[1]), q(donnees[2]), p
 
     int offset = 3; //offset de lecture du fichier, initialisé à 3 car on a déjà lu trois valeurs
 
-    poids_r = new int*[m]; //Déclare un pointeur vers un pointeur d'entier, pour un tableau à deux dimensions
-    poids_d = new int*[q]; //Soit un pointeur vers un tableau.
+    poids_r = new int*[m]; 
+    poids_d = new int*[q]; 
 
     for (int i=0; i < m; i++) //création des tableaux à deux dimensions
     {
@@ -108,10 +108,6 @@ int Data::get_q()
 {
     return q;
 }
-
-//Les attributs sont privés, mais comme les getters retournent des pointeurs
-//on risque de modifier l'attribut dans le main.
-//Pour éviter ça, on copiera le retour du getter dans le main.
 
 int* Data::get_profits() const
 {   

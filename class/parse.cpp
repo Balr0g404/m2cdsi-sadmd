@@ -42,10 +42,7 @@ vector<int> readData(string path)
             extracted = extractIntegerWord(line);
             for (int i=0; i < extracted.size(); i++)
             {
-                if (extracted[i] != ' ' && extracted[i] != '\n' )
-                {
-                    fichier.push_back(extracted[i]);
-                }
+                fichier.push_back(extracted[i]);
             }
         }
     }
