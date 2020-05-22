@@ -19,3 +19,5 @@ Pour l'instant je ne pense pas que ça soit nescessaire de se compliquer la vie 
 
 La classe Data permet d'initialiser un objet contenant toutes les données du fichier correspondant dont on se servira par la suite.
 
+Pour tester le code, on le clone, on se met dans le dossier, on tape **make**, puis *./output*.
+
