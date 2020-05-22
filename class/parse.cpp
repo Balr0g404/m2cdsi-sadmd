@@ -50,21 +50,6 @@ vector<int> readData(string path)
     {
         cout << "Erreur de lecture du fichier" << endl;
     }
-
-    int i = 0;
-
-    // while(i < fichier.size()) //Retire les lignes vides
-    // {
-    //     if (fichier[i].size() == 0)
-    //     {
-    //         fichier.erase(fichier.begin() + i);
-    //         i = 0;
-    //     }
-    //     else
-    //     {
-    //         i++;
-    //     }
-    // }
    
     return fichier;
 }

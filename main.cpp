@@ -14,9 +14,9 @@ using namespace std;
 int main()
 {
 
-    //string path = "data/n=100,m=5-20200416/100Md5_1_1_mixte.txt";
+    string path = "data/n=100,m=5-20200416/100Md5_1_1_mixte.txt";
     //string path = "data/n=100,m=5-20200416/100Md5_15_5_pos.txt";
-    string path = "data/n=250,m=30-20200416/250Md30_15_30_mixte.txt";
+    //string path = "data/n=250,m=30-20200416/250Md30_15_30_mixte.txt";
 
     vector<int> donnees = readData(path);
     Data instance(donnees);

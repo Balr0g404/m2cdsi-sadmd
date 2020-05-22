@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void printVect(vector<int> vect)
+void printVect(vector<int> vect) //Affiche un vect
 {
     for (int i=0; i < vect.size(); i++)
     {
@@ -12,7 +12,7 @@ void printVect(vector<int> vect)
     cout << endl;
 }
 
-void printArr(int arr[], int taille)
+void printArr(int arr[], int taille) //Affiche un tableau
 {
     for (int i=0; i < taille; i++)
     {
