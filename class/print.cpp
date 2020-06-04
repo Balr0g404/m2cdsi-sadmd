@@ -20,3 +20,12 @@ void printArr(int arr[], int taille) //Affiche un tableau
     }
     cout << endl;
 }
+
+int* arrCopy (int arr1[], int arr2[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        arr1[i] = arr2[i];
+    }
+    
+}
