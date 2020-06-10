@@ -21,3 +21,5 @@ La classe Data permet d'initialiser un objet contenant toutes les données du fi
 
 Pour tester le code, on le clone, on se met dans le dossier, on tape **make**, puis *./output*.
 
+En cas d'erreur de compilation, ne pas oublier de faire **make clean** avant de retenter une compilation.
+
