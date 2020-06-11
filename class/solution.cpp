@@ -64,12 +64,13 @@ bool* Solution::get_variables()
 }
 void Solution::print_s()
 {
-    cout << "{";
+    //cout << "{";
     for (int i = 0; i < size-1; i++)
     {
         cout << variables[i] << ", ";
     }
-    cout << variables[size - 1] << "}";
+    //cout << variables[size - 1] << "}";
+    cout << variables[size - 1];
 }
 
 void Solution::print_s(int index)

@@ -2,7 +2,7 @@ all: main
 	rm *.o
 
 main: parse dataa print solution main.cpp
-	g++ -o output parse.o data.o print.o solution.o main.cpp
+	g++ -o TPMETA parse.o data.o print.o solution.o main.cpp
 
 parse: class/parse.cpp
 	g++ -c -o parse.o class/parse.cpp

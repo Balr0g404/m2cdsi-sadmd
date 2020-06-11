@@ -7,6 +7,8 @@
 #include <random>
 #include <algorithm>
 #include <iterator>
+#include <time.h>
+#include <ctime>
 
 #include "headers/data.hpp"
 #include "headers/parse.hpp"
@@ -15,7 +17,12 @@
 
 using namespace std;
 
-Solution constructiveSolution(Data instance)
+int elapsedTime(clock_t start){
+int dif = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+return dif;
+}
+
+Solution constructiveSolution(Data instance, int tm)
 /* 
 Construit une solution faisable de manière constructive.
 On séléctionne les objets de manière aléatoire, 
@@ -42,13 +49,17 @@ Sinon, on renvoie la solution.
     int i = 0;
     int count = 0;
     vector<int> rng;
+
+    srand(time(NULL)); //Gestion du temps
+    clock_t start = clock();
+
     //Fin initialisation
 
     //Main loop
-    while (feasible == false)
+    while (feasible == false && elapsedTime(start) < tm)
     {
-        count++;
-        cout << "Nombre d'itération : " << count << endl; //For testing purpose
+        // count++;
+        // cout << "Nombre d'itération : " << count << endl; //For testing purpose
         
         s.set_variables(init); //On met la solution à 0
         int ressources[m] = {0}; //On initialise les tableaux des contraintes
@@ -121,23 +132,55 @@ Sinon, on renvoie la solution.
     //Fin main loop
 
     //s.print_s(); //On affiche la solution
-    cout << s.objective_fonction(); //On affiche la valeur objective de la solution
+    //cout << s.objective_fonction(); //On affiche la valeur objective de la solution
     
     return s;
     
 }
 
-int main()
+int main(int argc, char* argv[])
 {
 
-    //string path = "data/n=100,m=5-20200416/100Md5_1_1_mixte.txt";
-    string path = "data/n=100,m=5-20200416/100Md5_15_5_pos.txt";
-    //string path = "data/n=250,m=30-20200416/250Md30_15_30_mixte.txt"; // Trop gros pour l'algoritme.
+    if (argc != 3)
+    {
+        cout << "Usage : TPMETA [fichier de données] [temps d'éxécution maximal en seconde]" << endl;
+        exit(-1);
+    }
 
+    string path;
+    path = argv[1];
+    string output = path.substr(0, path.size()-4); //Retire le '.txt' du nom de fichier
+    output = output + "_res.txt";
+    int MAX_TIME = stoi(argv[2]);
+    
     vector<int> donnees = readData(path);
     Data instance(donnees);
 
-    Solution s = constructiveSolution(donnees);
+    Solution s = constructiveSolution(donnees, MAX_TIME);
+
+    ofstream results(output.c_str());
+    int n = instance.get_n();
+    int m = instance.get_m();
+    int q = instance.get_q();
+
+    bool* final_solution = s.get_variables();
+    int final_score = s.objective_fonction();
+
+    if (results)
+    {
+        results << path << endl;
+        results << n << " " << m << " " << " " << q << endl;
+        results << final_score << " : ";
+        for (int i = 0; i < n; i++)
+        {
+            results << final_solution[i] << " ";
+        }
+        
+    }
+    else
+    {
+        cout << "Problème lors de l'ouverture du fichier" << endl;
+    }
 
     return 0;
 }
